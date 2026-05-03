@@ -1,4 +1,4 @@
-package clases.enums;
+package Clases.Enums;
 
 public enum Genero {
 
