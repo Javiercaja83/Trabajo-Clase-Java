@@ -47,7 +47,6 @@ public class Main {
     }
 
     public static Usuario crearUsuario() {
-        //todo: crear usuario con sus atributos, manejar la excepcion de contraseña inválida y mostrar un mensaje de error al usuario si la contraseña no cumple con los requisitos.
         String nombre, primerApellido, segundoApellido, email, password, numeroTarjeta, nombreTitular;
         LocalDate fechaNacimiento, fechaRegistro, fechaCaducidad;
         TarjetaBancaria tarjetaBancaria;
