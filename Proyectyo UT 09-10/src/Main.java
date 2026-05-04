@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Clases.TarjetaBancaria;
@@ -7,6 +8,8 @@ import Clases.Excepciones.ContraseniaInvalidaException;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
+
     public static void main(String[] args)   {
         menuPrincipal();
 
@@ -26,9 +29,13 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    crearUsuario();
+                   Usuario usuario = crearUsuario();
+                   usuarios.add(usuario);
                     break;
                 case 2:
+                    iniciarSesion();
+                    break;
+                    case 3:
                     salir = true;
                     System.out.println("Saliendo del programa...");
                     break;
@@ -97,5 +104,9 @@ public class Main {
             System.out.println("Error al crear el usuario: " + e.getMessage());
         }
         return null;
+    }
+
+    public static void iniciarSesion() {
+
     }
 }
