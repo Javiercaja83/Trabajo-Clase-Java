@@ -56,4 +56,51 @@ public class Usuario extends Persona {
         return tieneMayuscula && tieneMinuscula && tieneNumero;
     }
 
+    public String getPrimerApellido() {
+        return PrimerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        PrimerApellido = primerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return SegundoApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        SegundoApellido = segundoApellido;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return FechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        FechaRegistro = fechaRegistro;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public TarjetaBancaria getTarjetaBancaria() {
+        return tarjetaBancaria;
+    }
+
+    public void setTarjetaBancaria(TarjetaBancaria tarjetaBancaria) {
+        this.tarjetaBancaria = tarjetaBancaria;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+   
+
+
 }

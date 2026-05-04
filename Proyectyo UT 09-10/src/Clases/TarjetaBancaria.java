@@ -16,4 +16,32 @@ public class TarjetaBancaria {
         this.CVV = CVV;
     }
 
+    public String getNumeroTarjeta() {
+        return numeroTarjeta;
+    }
+
+    public LocalDate getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(LocalDate fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public String getNombreTitular() {
+        return NombreTitular;
+    }
+
+    public void setNombreTitular(String nombreTitular) {
+        NombreTitular = nombreTitular;
+    }
+
+    public int getCVV() {
+        return CVV;
+    }
+
+    public void setCVV(int cVV) {
+        CVV = cVV;
+    }
+
 }
