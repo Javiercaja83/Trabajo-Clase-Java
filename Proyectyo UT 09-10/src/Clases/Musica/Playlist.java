@@ -1,42 +1,45 @@
-
 package Clases.Musica;
 
 import java.util.LinkedList;
 
 public class Playlist {
 
-   
-    private LinkedList <Cancion> canciones = new LinkedList<>();
+    private String titulo;
+    private LinkedList<Cancion> canciones;
 
-    // Creamos la playlist
-    public Playlist(LinkedList<Cancion> canciones) {
-         this.canciones = canciones;
+    public Playlist(String titulo) {
+        this.titulo = titulo;
+        this.canciones = new LinkedList<>();
     }
 
-    // Quitamos la playlist por titulo
-    public void quitarPlaylist(String titulo){
-        boolean existeTitulo = canciones.stream().anyMatch(cancion->cancion.getTitulo().equals(titulo));
-        if (existeTitulo){
-           canciones.removeAll(canciones);
-        } else {
-            System.out.println("No existe la playlist");
-            
-        }
-
+    public String getTitulo() {
+        return titulo;
     }
 
-    
+    public LinkedList<Cancion> getCanciones() {
+        return canciones;
+    }
 
-    
+    public void addCancion(Cancion c) {
+        canciones.add(c);
+    }
 
-
-
-
-
-
-
-
-
-
-    
+    public boolean estaVacia() {
+        return canciones.isEmpty();
+    }
 }
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
