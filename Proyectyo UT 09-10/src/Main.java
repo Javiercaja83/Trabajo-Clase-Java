@@ -11,29 +11,31 @@ public class Main {
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public static void main(String[] args)   {
-        menuPrincipal();
+        menuUsuario();
 
     }
 
-    public static void menuPrincipal() {
+    public static boolean menuUsuario() {
         boolean salir = false;
+        boolean sesionIniciada = false;
         int opcion = 0;
 
-        while (!salir) {
+        while (!salir && !sesionIniciada) {
             System.out.println("=== Menú Principal ===");
             System.out.println("1. Crear Usuario");
-            System.out.println("2. Salir");
+            System.out.println("2. Iniciar Sesión");
+            System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
 
             switch (opcion) {
                 case 1:
-                   Usuario usuario = crearUsuario();
-                   usuarios.add(usuario);
-                    break;
+                   sesionIniciada = crearUsuario();
+
+                break;
                 case 2:
-                    iniciarSesion();
+                    sesionIniciada = iniciarSesion();
                     break;
                     case 3:
                     salir = true;
@@ -43,10 +45,10 @@ public class Main {
                     System.out.println("Opción no válida. Intente nuevamente.");
             }
         }
-        
+        return sesionIniciada;
     }
 
-    public static Usuario crearUsuario() {
+    public static boolean crearUsuario() {
         String nombre, primerApellido, segundoApellido, email, password, numeroTarjeta, nombreTitular;
         LocalDate fechaNacimiento, fechaRegistro, fechaCaducidad;
         TarjetaBancaria tarjetaBancaria;
@@ -66,9 +68,9 @@ public class Main {
         System.out.print("Fecha de Nacimiento (YYYY-MM-DD): ");
         fechaNacimiento = LocalDate.parse(scanner.nextLine());
         
-        System.out.print("Fecha de Registro (YYYY-MM-DD): ");
         fechaRegistro = LocalDate.now(); // Asignamos la fecha actual como fecha de registro
-        
+        System.out.print("Fecha de Registro : " + fechaRegistro + "\n");
+      
         System.out.print("Email: ");
         email = scanner.nextLine();
         
@@ -84,7 +86,7 @@ public class Main {
         // Validamos que la fecha de caducidad no sea anterior o igual a la fecha actual, ya que una tarjeta vencida no es válida.
         if (fechaCaducidad.isBefore(LocalDate.now()) || fechaCaducidad.equals(LocalDate.now())) {
             System.out.println("La fecha de caducidad no es válida.");
-            return null;
+            return false;
         }
         
         System.out.print("Nombre del Titular: ");
@@ -92,20 +94,39 @@ public class Main {
         
         System.out.print("CVV: ");
         CVV = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea
 
         tarjetaBancaria = new TarjetaBancaria(numeroTarjeta, fechaCaducidad, nombreTitular, CVV);
         try {
             Usuario usuario = new Usuario(nombre, fechaNacimiento, primerApellido, segundoApellido, fechaRegistro, email, password);
             usuario.setTarjetaBancaria(tarjetaBancaria);
+            usuarios.add(usuario);
             System.out.println("Usuario creado exitosamente.");
-            return usuario;
+            return true;
         } catch (ContraseniaInvalidaException e) {
             System.out.println("Error al crear el usuario: " + e.getMessage());
         }
-        return null;
+        return false;
     }
 
-    public static void iniciarSesion() {
+    public static boolean iniciarSesion() {
+        String email, password; 
+        System.out.println("=== Iniciar Sesión ===");
+        System.out.print("Email: ");
+        email = scanner.nextLine();
+        System.out.print("Contraseña: ");
+        password = scanner.nextLine();
 
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equals(email) && usuario.getPassword().equals(password)) {
+                System.out.println("Sesión iniciada correctamente.");
+                return true;
+            }
+        }
+        System.out.println("Email o contraseña incorrectos.");
+        return false;
     }
+
+    
 }
+

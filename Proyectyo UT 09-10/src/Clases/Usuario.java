@@ -15,7 +15,6 @@ public class Usuario extends Persona {
 
     public Usuario(String nombre, LocalDate fechaNacimiento, String primerApellido, String segundoApellido, 
         LocalDate fechaRegistro, String email, String password) {
-        // Llamamos al constructor de la clase padre (Persona) para inicializar los atributos heredados.
         super(nombre, fechaNacimiento);
         this.PrimerApellido = primerApellido;
         this.SegundoApellido = segundoApellido;
@@ -26,6 +25,16 @@ public class Usuario extends Persona {
             this.password = password;
         } else {
             // Si la contraseña no es válida, lanzamos una excepción para informar al usuario del error.
+            throw new ContraseniaInvalidaException("La contraseña no cumple con los requisitos.");
+        }
+    }
+    
+    public Usuario(String email, String password){
+        super("", null);
+        this.email = email;
+        if (esContraseniaValida(password)) {
+            this.password = password;
+        } else {
             throw new ContraseniaInvalidaException("La contraseña no cumple con los requisitos.");
         }
     }
@@ -99,8 +108,5 @@ public class Usuario extends Persona {
     public String getEmail() {
         return email;
     }
-
-   
-
 
 }
