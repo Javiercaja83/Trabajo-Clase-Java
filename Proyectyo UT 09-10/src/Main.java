@@ -116,15 +116,19 @@ public class Main {
         email = scanner.nextLine();
         System.out.print("Contraseña: ");
         password = scanner.nextLine();
-
-        for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().equals(email) && usuario.getPassword().equals(password)) {
-                System.out.println("Sesión iniciada correctamente.");
-                return true;
-            }
+        
+        boolean existeUsuario = usuarios.stream()
+        
+        .anyMatch(usuario -> usuario.getEmail().equals(email)
+                    && usuario.getPassword().equals(password));
+        if (existeUsuario) {
+            System.out.println("Sesión iniciada correctamente.");
+            return true;
+        } else {
+            System.out.println("Email o contraseña incorrectos.");
+            return false;
         }
-        System.out.println("Email o contraseña incorrectos.");
-        return false;
+        
     }
 
     
