@@ -1,9 +1,11 @@
 package Clases.Musica;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 
 
-public class Artista {
+public class Artista{
 
 
     private int codigo;
@@ -50,5 +52,24 @@ public class Artista {
         this.pais = pais;
     }
 
+    public boolean guardarDatos(Artista artista) {
+        boolean exito = false;
+        
+        try (     FileOutputStream writer = new FileOutputStream("artista.txt", true); // true para modo append
+            BufferedOutputStream bos = new BufferedOutputStream(writer)) {
+            
+             
+            bos.write(String.format("Código: %d, Nombre: %s, Fecha de Nacimiento: %s, País: %s%n",
+                    artista.getCodigo(), artista.getNombre(), artista.getFechaNacimiento(), artista.getPais()).getBytes());
+            exito = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return exito;
+
+
+    }
 
 }

@@ -1,6 +1,8 @@
 package Clases.Musica;
 
 import Clases.Enums.*;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -80,5 +82,25 @@ public class Cancion {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
+    public boolean guardarDatos(Cancion cancion) {
+        boolean exito = false;
+        
+        try (     FileOutputStream writer = new FileOutputStream("cancion.txt", true); // true para modo append
+            BufferedOutputStream bos = new BufferedOutputStream(writer)) {
+            
+             
+            bos.write(String.format(
+                "Código: %d, Nombre: %s, Fecha de Lanzamiento: %s, Álbum: %s%n",
+                    cancion.getCodigo(), cancion.getTitulo(), cancion.getFechaLanzamiento(), cancion.getAlbum()).getBytes());
+
+            exito = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return exito;
+
+    }
 
 }

@@ -17,6 +17,8 @@ public class Main {
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static ArrayList<Cancion> canciones = new ArrayList<>();
     private static ArrayList<Playlist> playlists = new ArrayList<>();
+    private static ArrayList<Artista> artistas = new ArrayList<>();
+      
     private static HistorialReproducciones historial = new HistorialReproducciones();
     private static Playlist playlist = new Playlist("favoritos");
 
@@ -183,6 +185,8 @@ public class Main {
                     GestorXmlPlaylist.guardarPlaylist(playlists);
                     break;
                 case 5:
+                    playlist.getCanciones().stream().forEach(cancion -> cancion.guardarDatos(cancion));
+                    artistas.stream().forEach(artista -> artista.guardarDatos(artista));
                     System.out.println("Sesión cerrada.");
                     break;
                 default:
@@ -295,12 +299,7 @@ public class Main {
         System.out.println("Ingrese el segundo donde desea detener la canción:"); // pido el segundo donde
 
         int segundoDetencion = scanner.nextInt();
-        Reproduccion reproduccion = new Reproduccion(cancion, LocalDate.now(), segundoDetencion, segundoDetencion); // creo
-                                                                                                                    // una
-                                                                                                                    // reproducción
-                                                                                                                    // con
-                                                                                                                    // la
-                                                                                                                    // canción,
+        Reproduccion reproduccion = new Reproduccion(cancion, LocalDate.now(), segundoDetencion, segundoDetencion); 
         // la fecha actual y los segundos escuchados (en este caso, el mismo que el
         // segundo de detención)
         historial.agregarReproduccion(reproduccion);
@@ -310,14 +309,19 @@ public class Main {
     public static void cargarDatosPrueba() {
         Artista artista1 = new Artista(01, LocalDate.of(2004, 6, 10), "javier", "gomez");
         Artista artista2 = new Artista(02, LocalDate.of(2003, 12, 1), "javier", "espania");
-        ArrayList<Artista> artistas = new ArrayList<>();
+        artista1.guardarDatos(artista1);
+        artista2.guardarDatos(artista2);
         artistas.add(artista1);
         artistas.add(artista2);
+        
+ 
         Usuario usuario1 = new Usuario("javier", LocalDate.of(2004, 6, 10), "gomez", "espania", LocalDate.now(),
                 "javier@test.com", "Prueba123");
         usuarios.add(usuario1);
         Cancion cancion1 = new Cancion("album1", artistas, 01, 240, LocalDate.of(2020, 5, 20), null, "cancion1");
         Cancion cancion2 = new Cancion("album2", artistas, 02, 200, LocalDate.of(2021, 3, 15), null, "cancion2");
+        cancion1.guardarDatos(cancion1);
+        cancion2.guardarDatos(cancion2);
         canciones.add(cancion1);
         canciones.add(cancion2);
         playlist.agregarCancion(cancion1);
