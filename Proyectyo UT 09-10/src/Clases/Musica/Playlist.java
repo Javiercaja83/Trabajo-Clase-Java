@@ -1,15 +1,22 @@
+
 package Clases.Musica;
 
 import java.util.LinkedList;
 
 public class Playlist {
 
-    private String titulo;
-    private LinkedList<Cancion> canciones;
+   private String titulo;
+    private LinkedList <Cancion> canciones = new LinkedList<>();
+
+  
+
 
     public Playlist(String titulo) {
         this.titulo = titulo;
-        this.canciones = new LinkedList<>();
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getTitulo() {
@@ -20,26 +27,16 @@ public class Playlist {
         return canciones;
     }
 
-    public void addCancion(Cancion c) {
-        canciones.add(c);
+    public void setCanciones(LinkedList<Cancion> canciones) {
+        this.canciones = canciones;
+    }
+    
+    public void agregarCancion(Cancion cancion) {
+        canciones.add(cancion);
     }
 
-    public boolean estaVacia() {
-        return canciones.isEmpty();
+    public void eliminarCancion(Cancion cancion) {
+        canciones.remove(cancion);
     }
+    
 }
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-    
-

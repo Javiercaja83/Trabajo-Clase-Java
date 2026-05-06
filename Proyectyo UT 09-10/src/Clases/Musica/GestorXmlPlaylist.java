@@ -1,5 +1,5 @@
-import Clases.Musica.Cancion;
-import Clases.Musica.Playlist;
+package Clases.Musica;
+
 import java.io.File;
 import java.util.List;
 import javax.xml.parsers.*;
@@ -8,7 +8,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
 
-public class Xml{
+
+public class GestorXmlPlaylist{
 
     public static void guardarPlaylist(List<Playlist> playlists) {
     try{
