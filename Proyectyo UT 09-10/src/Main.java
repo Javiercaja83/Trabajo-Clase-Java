@@ -390,4 +390,33 @@ public class Main {
         System.out.println("Género más escuchado: " + mejor);
     }
 
+    public static void MostrarArtistaFavorito(){
+    HashMap<String, Integer> contador = new HashMap<>();
+    
+        for(Reproduccion r : historial.getHistorial()){
+
+            if(r.getCancion().getArtista() == null) continue;
+
+            for(Artista a : r.getCancion().getArtista()){
+                String nombreArtista = a.getNombre();
+
+                contador.put(nombreArtista, contador.getOrDefault(nombreArtista, 0) +1);
+                
+            }
+            
+        }
+
+        String masEscuchado = null;
+        int max = 0;
+
+        for(String s  : contador.keySet()){
+
+            if(contador.get(s) > max){
+                max = contador.get(s);
+                max = s;
+                
+            }
+        }
+        System.out.println("Artista mas escuchado: " + masEscuchado);
+    }
 }
