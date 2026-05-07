@@ -19,7 +19,7 @@ public class Main {
     private static ArrayList<Cancion> canciones = new ArrayList<>();
     private static ArrayList<Playlist> playlists = new ArrayList<>();
     private static ArrayList<Artista> artistas = new ArrayList<>();
-      
+    private static Usuario usuarioActual;
     private static HistorialReproducciones historial = new HistorialReproducciones();
     private static Playlist playlist = new Playlist("favoritos");
 
@@ -300,6 +300,7 @@ public class Main {
         System.out.println("Ingrese el segundo donde desea detener la canción:"); // pido el segundo donde
 
         int segundoDetencion = scanner.nextInt();
+        scanner.nextLine();
         Reproduccion reproduccion = new Reproduccion(cancion, LocalDate.now(), segundoDetencion, segundoDetencion); 
         // la fecha actual y los segundos escuchados (en este caso, el mismo que el
         // segundo de detención)
@@ -413,7 +414,7 @@ public class Main {
 
             if(contador.get(s) > max){
                 max = contador.get(s);
-                max = s;
+                masEscuchado = s;
                 
             }
         }
