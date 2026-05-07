@@ -1,9 +1,4 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import Clases.TarjetaBancaria;
-import Clases.Usuario;
+import Clases.Enums.Genero;
 import Clases.Excepciones.ContraseniaInvalidaException;
 import Clases.Musica.Artista;
 import Clases.Musica.Cancion;
@@ -11,6 +6,12 @@ import Clases.Musica.GestorXmlPlaylist;
 import Clases.Musica.HistorialReproducciones;
 import Clases.Musica.Playlist;
 import Clases.Musica.Reproduccion;
+import Clases.TarjetaBancaria;
+import Clases.Usuario;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
@@ -328,6 +329,65 @@ public class Main {
         playlist.agregarCancion(cancion2);
         playlists.add(playlist);
 
+    }
+
+     public static void MostrarCancionMasEscuchada() {
+
+        if (historial.getHistorial().isEmpty()) {
+            System.out.println("No hay reproducciones");
+            return;
+        }
+
+        HashMap<Cancion, Integer> contador = new HashMap<>();
+
+        for (Reproduccion r : historial.getHistorial()) {
+            Cancion c = r.getCancion();
+            contador.put(c, contador.getOrDefault(c, 0) + 1);
+        }
+
+        Cancion mas = null;
+        int max = 0;
+
+        for (Cancion c : contador.keySet()) {
+            if (contador.get(c) > max) {
+                max = contador.get(c);
+                mas = c;
+            }
+        }
+
+        System.out.println("Canción más escuchada: " +
+                (mas != null ? mas.getTitulo() : "Ninguna"));
+    }
+
+    public static void MostrarGeneroMasEscuchado() {
+
+        HashMap<String, Integer> contador = new HashMap<>();
+
+        for (Reproduccion r : historial.getHistorial()) {
+
+            if (r.getCancion().getGeneros() == null) continue;
+
+            for (Genero g : r.getCancion().getGeneros()) {
+
+                String nombre = g.toString();
+
+                contador.put(nombre,
+                        contador.getOrDefault(nombre, 0) + 1);
+            }
+        }
+
+        String mejor = null;
+        int max = 0;
+
+        for (String g : contador.keySet()) {
+
+            if (contador.get(g) > max) {
+                max = contador.get(g);
+                mejor = g;
+            }
+        }
+
+        System.out.println("Género más escuchado: " + mejor);
     }
 
 }
