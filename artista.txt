@@ -1,0 +1,2 @@
+Código: 1, Nombre: javier, Fecha de Nacimiento: 2004-06-10, País: gomez
+Código: 2, Nombre: javier, Fecha de Nacimiento: 2003-12-01, País: espania

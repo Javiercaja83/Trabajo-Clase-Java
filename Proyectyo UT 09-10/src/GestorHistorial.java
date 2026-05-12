@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Historial{
+public class GestorHistorial{
     
 public static void guardarHistorial(HistorialReproducciones historial) {
     try (BufferedWriter bw = new BufferedWriter(new FileWriter("historial.txt"))){
