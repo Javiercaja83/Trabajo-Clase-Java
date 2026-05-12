@@ -35,14 +35,17 @@ public class Main {
         }
 
     }
-    //Primer metodo, menu para iniciar sesion o crear usuario, devuelve un booleano para saber si se ha iniciado sesion o no
+
+    // Primer metodo, menu para iniciar sesion o crear usuario, devuelve un booleano
+    // para saber si se ha iniciado sesion o no
     public static boolean menuUsuario() {
-        //boolean del menu
+        // boolean del menu
         boolean salir = false;
-        //boolean a devolver para saber si se ha iniciado sesion o no
+        // boolean a devolver para saber si se ha iniciado sesion o no
         boolean sesionIniciada = false;
         int opcion = 0;
-        //mientras no se haya iniciado sesion y no se haya seleccionado salir, se muestra el menu
+        // mientras no se haya iniciado sesion y no se haya seleccionado salir, se
+        // muestra el menu
         while (!salir && !sesionIniciada) {
             System.out.println("=== Menú Principal ===");
             System.out.println("1. Crear Usuario");
@@ -54,11 +57,13 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    sesionIniciada = crearUsuario(); // si el usuario se crea correctamente, se inicia sesion automaticamente
+                    sesionIniciada = crearUsuario(); // si el usuario se crea correctamente, se inicia sesion
+                                                     // automaticamente
                     break;
                 case 2:
-                    sesionIniciada = iniciarSesion();   // si el inicio de sesion es correcto, se devuelve true y se inicia sesion,
-                                                        // sino se devuelve false y se muestra el menu de nuevo
+                    sesionIniciada = iniciarSesion(); // si el inicio de sesion es correcto, se devuelve true y se
+                                                      // inicia sesion,
+                                                      // sino se devuelve false y se muestra el menu de nuevo
                     break;
                 case 3:
                     salir = true;
@@ -73,7 +78,8 @@ public class Main {
     }
 
     public static boolean crearUsuario() {
-        //variables para almacenar los datos del usuario, se piden por consola y crear el usuario
+        // variables para almacenar los datos del usuario, se piden por consola y crear
+        // el usuario
         String nombre, primerApellido, segundoApellido, email, password, numeroTarjeta, nombreTitular;
         LocalDate fechaNacimiento, fechaRegistro, fechaCaducidad;
         TarjetaBancaria tarjetaBancaria;
@@ -101,8 +107,9 @@ public class Main {
 
         System.out.print("Contraseña: ");
         password = scanner.nextLine();
-        //como la tarjeta bancaria es otra clase, indicamos que se introduzcan los datos de la tarjeta bancaria,
-        //  y se crea un objeto TarjetaBancaria con esos datos para asignarlo al usuario
+        // como la tarjeta bancaria es otra clase, indicamos que se introduzcan los
+        // datos de la tarjeta bancaria,
+        // y se crea un objeto TarjetaBancaria con esos datos para asignarlo al usuario
         System.out.println("=== Información de la Tarjeta Bancaria ===");
         System.out.print("Número de Tarjeta: ");
         numeroTarjeta = scanner.nextLine();
@@ -124,9 +131,12 @@ public class Main {
         scanner.nextLine(); // Consumir el salto de línea
         // Creamos la tarjeta bancaria con los datos introducidos
         tarjetaBancaria = new TarjetaBancaria(numeroTarjeta, fechaCaducidad, nombreTitular, CVV);
-        //intentamos crear el usuario con los datos introducidos, si la contraseña no cumple con los requisitos,
-        // se lanza una excepción y se muestra un mensaje de error, devolviendo false para indicar que no se ha creado el usuario ni se ha iniciado sesión.
-        // Si el usuario se crea correctamente, se devuelve true para indicar que se ha iniciado sesión automáticamente.
+        // intentamos crear el usuario con los datos introducidos, si la contraseña no
+        // cumple con los requisitos,
+        // se lanza una excepción y se muestra un mensaje de error, devolviendo false
+        // para indicar que no se ha creado el usuario ni se ha iniciado sesión.
+        // Si el usuario se crea correctamente, se devuelve true para indicar que se ha
+        // iniciado sesión automáticamente.
         try {
             Usuario usuario = new Usuario(nombre, fechaNacimiento, primerApellido, segundoApellido, fechaRegistro,
                     email, password);
@@ -141,8 +151,9 @@ public class Main {
     }
 
     public static boolean iniciarSesion() {
-        // en esta funcion solo necesitamos el email y la contraseña para verificar si el usuario existe en la lista de usuarios,
-        //  por lo que solo pedimos esos datos por consola
+        // en esta funcion solo necesitamos el email y la contraseña para verificar si
+        // el usuario existe en la lista de usuarios,
+        // por lo que solo pedimos esos datos por consola
         String email, password;
         System.out.println("=== Iniciar Sesión ===");
         System.out.print("Email: ");
@@ -150,9 +161,11 @@ public class Main {
         System.out.print("Contraseña: ");
         password = scanner.nextLine();
 
-        //verificamos si existe un usuario con ese email y contraseña con un stream y un anyMatch,
-        // que devuelve true si encuentra un usuario que cumpla con esa condición, y false si no lo encuentra,
-        //  indicando si se ha iniciado sesión correctamente o no.
+        // verificamos si existe un usuario con ese email y contraseña con un stream y
+        // un anyMatch,
+        // que devuelve true si encuentra un usuario que cumpla con esa condición, y
+        // false si no lo encuentra,
+        // indicando si se ha iniciado sesión correctamente o no.
         boolean existeUsuario = usuarios.stream()
                 .anyMatch(usuario -> usuario.getEmail().equals(email)
                         && usuario.getPassword().equals(password));
@@ -166,7 +179,7 @@ public class Main {
 
     }
 
-    //menu una vez logueado
+    // menu una vez logueado
     public static void menuUsuarioLogueado() {
         int opcion;
 
@@ -185,8 +198,9 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("Buscar canción .");
-                    buscarCancion(playlist); //playlist es un atributo de la clase Main, asi que no hace falta pasarlo como parametro a la funcion
-                     break;
+                    buscarCancion(playlist); // playlist es un atributo de la clase Main, asi que no hace falta pasarlo
+                                             // como parametro a la funcion
+                    break;
                 case 2:
                     System.out.println("Reproducir canción .");
                     reproducirCancionPorCodigo(playlist);
@@ -309,12 +323,20 @@ public class Main {
     public static void reproducirCancion(Cancion cancion) {
 
         System.out.println("Reproduciendo canción: " + cancion.getTitulo());
-        System.out.println("Ingrese el segundo donde desea detener la canción:"); // pido el segundo donde se detenga la cancion
+        System.out.println("Ingrese el segundo donde desea detener la canción:"); // pido el segundo donde se detenga la
+                                                                                  // cancion
 
         int segundoDetencion = scanner.nextInt();
         scanner.nextLine();
+
+        if (segundoDetencion < 0 || segundoDetencion > cancion.getDuracion()) {
+            System.out.println("Error: el segundo debe estar entre 0 y " + cancion.getDuracion());
+            return;
+        }
+
         Reproduccion reproduccion = new Reproduccion(cancion, LocalDate.now(), segundoDetencion, segundoDetencion);
-        // la fecha actual y los segundos escuchados (en este caso, el mismo que el segundo de detención)
+        // la fecha actual y los segundos escuchados (en este caso, el mismo que el
+        // segundo de detención)
         historial.agregarReproduccion(reproduccion);
         System.out.println("Canción detenida en el segundo: " + segundoDetencion);
     }
@@ -326,7 +348,6 @@ public class Main {
         artista2.guardarDatos(artista2);
         artistas.add(artista1);
         artistas.add(artista2);
-
 
         Usuario usuario1 = new Usuario("javier", LocalDate.of(2004, 6, 10), "gomez", "espania", LocalDate.now(),
                 "javier@test.com", "Prueba123");
@@ -343,7 +364,7 @@ public class Main {
 
     }
 
-     public static void MostrarCancionMasEscuchada() {
+    public static void MostrarCancionMasEscuchada() {
 
         if (historial.getHistorial().isEmpty()) {
             System.out.println("No hay reproducciones");
@@ -377,7 +398,8 @@ public class Main {
 
         for (Reproduccion r : historial.getHistorial()) {
 
-            if (r.getCancion().getGeneros() == null) continue;
+            if (r.getCancion().getGeneros() == null)
+                continue;
 
             for (Genero g : r.getCancion().getGeneros()) {
 
@@ -401,39 +423,39 @@ public class Main {
 
         System.out.println("Género más escuchado: " + mejor);
     }
-public static void MostrarArtistaFavorito() {
 
-    HashMap<String, Integer> contador = new HashMap<>();
+    public static void MostrarArtistaFavorito() {
 
-    for (Reproduccion r : historial.getHistorial()) {
+        HashMap<String, Integer> contador = new HashMap<>();
 
-        if (r.getCancion().getArtistas() == null)
-            continue;
+        for (Reproduccion r : historial.getHistorial()) {
 
-        for (Artista a : r.getCancion().getArtistas()) {
+            if (r.getCancion().getArtistas() == null)
+                continue;
 
-            String nombreArtista = a.getNombre();
+            for (Artista a : r.getCancion().getArtistas()) {
 
-            contador.put(
-                    nombreArtista,
-                    contador.getOrDefault(nombreArtista, 0) + 1);
+                String nombreArtista = a.getNombre();
+
+                contador.put(
+                        nombreArtista,
+                        contador.getOrDefault(nombreArtista, 0) + 1);
+            }
         }
-    }
 
-    String masEscuchado = null;
-    int max = 0;
+        String masEscuchado = null;
+        int max = 0;
 
-    for (String s : contador.keySet()) {
+        for (String s : contador.keySet()) {
 
-        if (contador.get(s) > max) {
+            if (contador.get(s) > max) {
 
-            max = contador.get(s);
-            masEscuchado = s;
+                max = contador.get(s);
+                masEscuchado = s;
+            }
         }
+
+        System.out.println("Artista más escuchado: " + masEscuchado);
     }
-
-    System.out.println("Artista más escuchado: " + masEscuchado);
-}
-
 
 }
